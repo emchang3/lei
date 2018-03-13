@@ -1,12 +1,26 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    diff-lcs (1.3)
     dotenv (2.2.1)
     mustermann (1.0.2)
     puma (3.11.3)
     rack (2.0.4)
     rack-protection (2.0.1)
       rack
+    rspec (3.7.0)
+      rspec-core (~> 3.7.0)
+      rspec-expectations (~> 3.7.0)
+      rspec-mocks (~> 3.7.0)
+    rspec-core (3.7.1)
+      rspec-support (~> 3.7.0)
+    rspec-expectations (3.7.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.7.0)
+    rspec-mocks (3.7.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.7.0)
+    rspec-support (3.7.1)
     sinatra (2.0.1)
       mustermann (~> 1.0)
       rack (~> 2.0)
@@ -22,11 +36,12 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  dotenv
-  puma
-  rack
-  sinatra
-  slim
+  dotenv (~> 2.2.1)
+  puma (~> 3.11.3)
+  rack (~> 2.0.4)
+  rspec (~> 3.7.0)
+  sinatra (~> 2.0.1)
+  slim (~> 3.0.9)
 
 BUNDLED WITH
    1.16.1
