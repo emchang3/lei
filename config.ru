@@ -6,6 +6,7 @@ require "rack/protection"
 require "slim"
 
 $root = File.dirname(__FILE__)
+$content_root = "#{$root}/content"
 
 configure do
     use Rack::Deflater
@@ -16,8 +17,8 @@ configure do
 end
 
 require "#{$root}/helpers/load_settings"
-
 require "#{$root}/helpers/load_controllers"
+require "#{$root}/helpers/load_md_parser"
 
 load_controllers
 

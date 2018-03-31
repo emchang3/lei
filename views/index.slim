@@ -3,8 +3,5 @@ html[lang="en"]
     == slim :"index_partials/index_head"
     body
         div[style="padding: 100px;"]
-            h1 Sinatra
-            p
-                | foo: 
-                = foo
-            == slim :"index_partials/index_scripts"
+            == foo
+        == slim :"index_partials/index_scripts"

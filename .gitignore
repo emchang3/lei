@@ -11,3 +11,6 @@ nohup.out
 
 # Node.js Dependencies
 node_modules
+
+# ** Content **
+# *.md
