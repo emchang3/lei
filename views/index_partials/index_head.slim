@@ -1,6 +1,11 @@
 head
-    title Sinatra
-    meta[charset="UTF-8"]
-    meta[name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"]
+    meta[charset="utf-8"]
+    script[async src="https://cdn.ampproject.org/v0.js"]
+    link[rel="canonical" href="$SOME_URL"]
+    meta[name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1"]
+    == $amp_boiler
+
+    title Sinatra, AMPed!
     link[href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet"]
-    link[rel="stylesheet" type="text/css" href="/styles/style.css"]
+    style[amp-custom]
+        == style

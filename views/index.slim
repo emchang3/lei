@@ -1,7 +1,6 @@
 doctype html
-html[lang="en"]
-    == slim :"index_partials/index_head"
+html[amp]
+    == slim :"index_partials/index_head", locals: { style: style }
     body
         div[class="landing-content"]
-            == foo
-        == slim :"index_partials/index_scripts"
+            == content

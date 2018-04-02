@@ -6,6 +6,9 @@ class ApplicationController < Sinatra::Base
     set :views, "#{$root}/views"
 
     get "/" do
-        slim :index, locals: { foo: md_parse("hello_world") }
+        slim :index, locals: {
+            content: parse_md("hello_world"),
+            style: load_css("style")
+        }
     end
 end

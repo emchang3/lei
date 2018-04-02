@@ -5,9 +5,6 @@ require "rack/protection"
 
 require "slim"
 
-$root = File.dirname(__FILE__)
-$content_root = "#{$root}/content"
-
 configure do
     use Rack::Deflater
     use Rack::Protection, :except => [ :remote_token, :session_hijacking ]
@@ -16,9 +13,18 @@ configure do
     set :bind, "0.0.0.0"
 end
 
-require "#{$root}/helpers/load_settings"
-require "#{$root}/helpers/load_controllers"
-require "#{$root}/helpers/load_md_parser"
+# Global Path Values
+
+$root = File.dirname(__FILE__)
+$content_root = "#{$root}/content"
+$style_root = "#{$root}/static/styles"
+
+# Pulling in Helper Methods
+
+require "#{$root}/helpers/settings_loader"
+require "#{$root}/helpers/controller_loader"
+require "#{$root}/helpers/css_loader"
+require "#{$root}/helpers/md_parser"
 
 load_controllers
 
