@@ -1,6 +1,9 @@
 doctype html
 html[amp]
-    == slim :"index_partials/index_head", locals: { style: style }
+    == slim :"index_partials/index_head",
+            locals: { title: title, style: style }
     body
-        div[class="landing-content"]
+        amp-state#content
+            script[type="application/json"] { "contentHidden": false }
+        div#index-main *contentAttrs
             == content

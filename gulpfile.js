@@ -1,21 +1,14 @@
+const exec = require('child_process').exec;
 const gulp = require('gulp');
 const pump = require('pump');
 
 const cleanCSS = require('gulp-clean-css');
 const less = require('gulp-less');
-const uglify = require('gulp-uglify');
 
-const jsFiles = `${__dirname}/src/scripts/*.js`;
-const jsDest = `${__dirname}/static/scripts`;
-
-const lessFiles = `${__dirname}/src/styles/*.less`;
+const styleSources = `${__dirname}/src/styles`;
+const rbStyles = `${styleSources}/experimental/*.rb`;
+const lessFiles = `${styleSources}/*.less`;
 const cssDest = `${__dirname}/static/styles`;
-
-const minify = () => pump(
-	[ gulp.src(jsFiles), uglify(), gulp.dest(jsDest) ]
-);
-
-gulp.task('minify', minify);
 
 const shrink = () => pump(
 	[ gulp.src(lessFiles), less(), cleanCSS(), gulp.dest(cssDest) ]
@@ -23,7 +16,13 @@ const shrink = () => pump(
 
 gulp.task('shrink', shrink);
 
-gulp.task('default', [ 'minify', 'shrink' ], () => {
-	gulp.watch(jsFiles, [ 'minify' ]);
+const transpose = (chObj) => {
+	exec(`ruby ${chObj.path}`);
+};
+
+const rbStyleWatcher = gulp.watch(rbStyles)
+rbStyleWatcher.on('change', transpose);
+
+gulp.task('default', [ 'shrink' ], () => {
 	gulp.watch(lessFiles, [ 'shrink' ]);
 });

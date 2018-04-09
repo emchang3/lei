@@ -1,31 +1,32 @@
 require "sinatra"
-
+require "slim"
 require "rack/deflater"
 require "rack/protection"
 
-require "slim"
+# Project Root
+
+$root = File.dirname(__FILE__)
+
+# Global Settings and Utilities
+
+require "#{$root}/helpers/global_utils"
+$utils = GlobalUtils.new
+
+# Sinatra Configuration
 
 configure do
     use Rack::Deflater
-    use Rack::Protection, :except => [ :remote_token, :session_hijacking ]
+    use Rack::Protection, except: [ :remote_token, :session_hijacking ]
     
     set :server, :puma
     set :bind, "0.0.0.0"
 end
 
-# Global Path Values
+puts "--- Loading Controllers ---"
+    
+Dir.glob("#{$root}/controllers/*.rb") do |controller|
+    require controller
+end
 
-$root = File.dirname(__FILE__)
-$content_root = "#{$root}/content"
-$style_root = "#{$root}/static/styles"
-
-# Pulling in Helper Methods
-
-require "#{$root}/helpers/settings_loader"
-require "#{$root}/helpers/controller_loader"
-require "#{$root}/helpers/css_loader"
-require "#{$root}/helpers/md_parser"
-
-load_controllers
-
-map("/") { run ApplicationController }
+map("/") { run IndexController }
+map("/content") { run ContentController }

@@ -1,0 +1,8 @@
+doctype html
+html[amp]
+    == slim :"content_partials/content_head",
+            locals: { title: title, style: style }
+    body
+        - for content in contentList
+            div[class="content"]
+                == content

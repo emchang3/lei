@@ -1,0 +1,66 @@
+puts "\tController: Content"
+
+class ContentController < Sinatra::Base
+    
+    set :public_folder, $assets_root
+    set :views, $views
+
+    get "/post/:title" do
+        title = params["title"]
+        redirect 404 if title.nil? || title.length < 1
+
+        contentList = Dir.glob("#{$content_root}/*_#{title}.md")
+        redirect 404 if contentList.length == 0
+
+        slim :content, locals: {
+            title: title,
+            content: $utils.parse_md(contentList)[0],
+            style: $utils.load_css("content")
+        }
+    end
+
+    get "/filterbydate" do
+        puts "--- params: #{params}"
+
+        year = params["year"]
+
+        # Future: Create a page with a form for date input and redirect to that.
+        redirect 404 if year.nil? || year.length != 4
+
+        globString = "#{$content_root}/#{year}-"
+        titleString = year
+
+        month = params["month"]
+        if !month.nil? && month.length == 2
+            globString += "#{month}-"
+            titleString = "#{Date::ABBR_MONTHNAMES[month.to_i]} #{titleString}"
+        end
+
+        day = params["day"]
+        if !day.nil? && day.length == 2
+            globString += "#{day}_"
+            titleString = "#{day} #{titleString}"
+        end
+
+        globString += "*.md"
+
+        contentList = Dir.glob(globString)
+        redirect 404 if contentList.length == 0
+
+        page = params["page"] ? params["page"].to_i : 1
+        firstIndex = (page - 1) * 5
+        lastIndex = page * 5
+        contentList = contentList[firstIndex..lastIndex]
+
+        slim :content_many, locals: {
+            title: titleString,
+            contentList: $utils.parse_md(contentList),
+            style: $utils.load_css("content")
+        }
+    end
+
+    not_found do
+        # Future: Create a 404 page.
+        404
+    end
+end
