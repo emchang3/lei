@@ -1,6 +1,8 @@
 puts "\tController: Content"
 
 class ContentController < Sinatra::Base
+
+    require "#{$root}/helpers/content_helpers"
     
     set :public_folder, $assets_root
     set :views, $views
@@ -20,8 +22,6 @@ class ContentController < Sinatra::Base
     end
 
     get "/filterbydate" do
-        puts "--- params: #{params}"
-
         year = params["year"]
 
         # Future: Create a page with a form for date input and redirect to that.
@@ -47,14 +47,20 @@ class ContentController < Sinatra::Base
         contentList = Dir.glob(globString)
         redirect 404 if contentList.length == 0
 
+        contentList = eject_banned(contentList)
+        redirect 404 if contentList.length == 0
+
+        contentList.sort!.reverse!
+
         page = params["page"] ? params["page"].to_i : 1
-        firstIndex = (page - 1) * 5
-        lastIndex = page * 5
-        contentList = contentList[firstIndex..lastIndex]
+        pages = (contentList.length / 5.0).ceil
+        contentList = page_slice(contentList, page)
 
         slim :content_many, locals: {
             title: titleString,
             contentList: $utils.parse_md(contentList),
+            page: page,
+            pages: pages,
             style: $utils.load_css("content")
         }
     end

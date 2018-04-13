@@ -1,3 +1,7 @@
+@trop: {
+    transition: opacity 0.5s;
+};
+
 html, body {
     width: 100%;
     height: 100%;
@@ -10,12 +14,11 @@ html, body {
     
     &.hidden {
         opacity: 0;
-        transition: opacity 0.5s;
+        @trop();
     }
 
     &.shown {
         opacity: 1;
-        transition: opacity 0.5s;
+        @trop();
     }
 }
-

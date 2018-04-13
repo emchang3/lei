@@ -18,6 +18,8 @@ class GlobalUtils
         $style_root = "#{$assets_root}/styles"
         $views = "#{$root}/views"
 
+        $banlist = "#{$root}/banlist.yml"
+
         <<~AMP
             AMP Boilerplate, as of 01 APR 2018:
             https://www.ampproject.org/docs/fundamentals/spec/amp-boilerplate
