@@ -51,4 +51,11 @@ class GlobalUtils
     def load_css(filename)
         `cat #{$style_root}/#{filename}.css`
     end
+
+    def nf_404
+        {
+            title: "404: Not Found",
+            style: self.load_css("notfound")
+        }
+    end
 end

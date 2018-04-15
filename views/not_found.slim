@@ -3,5 +3,6 @@ html[amp]
     == slim :"content_partials/content_head",
             locals: { title: title, style: style }
     body
-        div.content
-            == content
+        div#not-found
+            div.fof 404
+            h1 Content not found.

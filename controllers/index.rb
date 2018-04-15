@@ -12,6 +12,7 @@ class IndexController < Sinatra::Base
     end
 
     not_found do
-        404
+        # Future: Create a 404 page.
+        slim :not_found, locals: $utils.nf_404
     end
 end

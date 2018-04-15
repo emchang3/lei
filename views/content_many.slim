@@ -3,9 +3,9 @@ html[amp]
     == slim :"content_partials/content_head",
             locals: { title: title, style: style }
     body
-        h1[class="content"] Search Results
-        aside[class="content"]
+        h1.content Search Results
+        aside.content
             | Displaying page #{page} of #{pages}.
         - for content in contentList
-            section[class="content"]
+            section.content
                 == content

@@ -52,9 +52,12 @@ class ContentController < Sinatra::Base
 
         contentList.sort!.reverse!
 
-        page = params["page"] ? params["page"].to_i : 1
-        pages = (contentList.length / 5.0).ceil
-        contentList = page_slice(contentList, page)
+        pageParam = params["page"].to_i
+        
+        contentParts = page_slice(contentList, pageParam)
+        contentList = contentParts[:contentList]
+        page = contentParts[:page]
+        pages = contentParts[:pages]
 
         slim :content_many, locals: {
             title: titleString,
@@ -67,6 +70,6 @@ class ContentController < Sinatra::Base
 
     not_found do
         # Future: Create a 404 page.
-        404
+        slim :not_found, locals: $utils.nf_404
     end
 end
