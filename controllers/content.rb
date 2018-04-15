@@ -12,6 +12,9 @@ class ContentController < Sinatra::Base
         redirect 404 if title.nil? || title.length < 1
 
         contentList = Dir.glob("#{$content_root}/*_#{title}.md")
+        redirect 404 if contentList.length != 1
+
+        contentList = eject_banned(contentList)
         redirect 404 if contentList.length == 0
 
         slim :content, locals: {

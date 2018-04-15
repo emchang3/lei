@@ -1,1 +1,1 @@
-body,html{width:100%;height:100%;margin:0;font-family:Lato,sans-serif}h1{font-weight:300}.landing-content{padding:24px}.landing-content.hidden{opacity:0;transition:opacity .5s}.landing-content.shown{opacity:1;transition:opacity .5s}
+body,html{width:100vw;height:100vh;margin:0;font-family:Lato,sans-serif}h1{font-weight:300}.landing-content{padding:24px}.landing-content.hidden{opacity:0;transition:opacity .5s}.landing-content.shown{opacity:1;transition:opacity .5s}
