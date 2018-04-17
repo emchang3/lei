@@ -9,13 +9,6 @@ def index_locals
     {
         title: "靁 - léi",
         aboveFold: $utils.parse_md(indexParts)[0],
-        # contentAttrs: {
-        #     "[class]": "content.#{ch} ? '#{lc} hidden' : '#{lc} shown'",
-        #     "class": "#{lc} shown",
-        #     "on": "tap:AMP.setState({ content: { #{ch}: !content.#{ch}} })",
-        #     "role": "Main",
-        #     "tabindex": "0"
-        # },
         style: $utils.load_css("index")
     }
 end

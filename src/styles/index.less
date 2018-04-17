@@ -11,4 +11,39 @@ h1 {
 #above-fold {
     @center-vert();
     @full-page();
+    @std-margin();
+
+    h1 {
+        @std-margin();
+    }
+
+    ul:first-child {
+        @std-margin();
+        @std-padding();
+        background-color: rgba(0, 0, 0, 0.75);
+        box-sizing: border-box;
+        color: white;
+        position: fixed;
+        top: 0vh;
+        width: 100vw;
+
+        li {
+            display: block;
+            float: right;
+            padding-left: 1em;
+        }
+
+        li:first-child {
+            float: left;
+            padding-left: 0em;
+        }
+    }
+
+    p {
+        @std-margin();
+    }
+
+    p:last-child {
+        @std-padding();
+    }
 }
