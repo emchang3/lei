@@ -1,28 +1,14 @@
-@trop: {
-    transition: opacity 0.5s;
-};
+@import './common';
 
 html, body {
-    width: 100vw;
-    height: 100vh;
-    margin: 0px;
-    font-family: 'Lato', sans-serif;
+    @base-page();
 }
 
 h1 {
-    font-weight: 300;
+    @fw300();
 }
 
-.landing-content {
-    padding: 24px;
-    
-    &.hidden {
-        opacity: 0;
-        @trop();
-    }
-
-    &.shown {
-        opacity: 1;
-        @trop();
-    }
+#above-fold {
+    @center-vert();
+    @full-page();
 }

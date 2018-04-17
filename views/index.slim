@@ -3,7 +3,5 @@ html[amp]
     == slim :"index_partials/index_head",
             locals: { title: title, style: style }
     body
-        amp-state[id="content"]
-            script[type="application/json"] { "contentHidden": false }
-        div#index-main *contentAttrs
-            == content
+        div#above-fold.content
+            == aboveFold
