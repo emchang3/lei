@@ -1,11 +1,9 @@
-[&#10514;][1]
+<a name="internals" href="#top">&#10514;</a>
 
 &#9092;
 
-## <a name="internals">Internals</a>
+## Internals
 
 (Content).
 
 (Link to Next | Bot Nav)
-
-[1]: #top
