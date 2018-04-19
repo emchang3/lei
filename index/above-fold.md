@@ -1,12 +1,14 @@
-- 靁
-- ABOUT
-- DOCS
+- <a name="top" href="/">&#9779;</a>
 - CONTACT
+- GITHUB
+- DOCS
 
-![léi][lei]
+&#38721;
 
 # léi
 
 A Sinatra-based springboard for AMP projects.
 
-[lei]: /images/lei-cropped.png
+[&#8615;][1]
+
+[1]: #about

@@ -3,5 +3,6 @@ html[amp]
     == slim :"index_partials/index_head",
             locals: { title: title, style: style }
     body
-        div#above-fold.content
-            == aboveFold
+        - content.each_with_index do |part, i|
+            div[id="content-#{i}"]
+                == part

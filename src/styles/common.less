@@ -1,3 +1,7 @@
+@anim-bg-color: {
+    transition: background-color 0.35s;
+};
+
 @base-page: {
     margin: 0em;
     font-family: 'Lato', sans-serif;
@@ -11,13 +15,47 @@
     align-items: center;
 };
 
+@fs10: {
+    font-size: 10em;
+};
+
+@fw300: {
+    font-weight: 300;
+};
+
+@full-bar-dark: {
+    background-color: rgba(0, 0, 0, 0.9);
+    box-sizing: border-box;
+    color: white;
+    width: 100vw;
+};
+
+@full-bar-light: {
+    background-color: rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    width: 100vw;
+};
+
 @full-page: {
     width: 100vw;
     height: 100vh;
 };
 
-@fw300: {
-    font-weight: 300;
+@link-ad: {
+    color: white;
+    text-decoration: none;
+};
+
+@link-al: {
+    color: black;
+    text-decoration: none;
+};
+
+@spread-vert: {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 };
 
 @std-padding: {
@@ -27,3 +65,28 @@
 @std-margin: {
     margin: 0em;
 };
+
+.page-nav-button {
+    padding: 0em;
+    
+    a {
+        @anim-bg-color();
+        @full-bar-light();
+        @std-margin();
+        @std-padding();
+        bottom: 0vh;
+        display: block;
+        text-align: center;
+    }
+
+    a:hover {
+        @anim-bg-color();
+        @full-bar-dark();
+        @link-ad();
+    }
+}
+
+.main-icon {
+    @fs10();
+    padding: 0em;
+}
