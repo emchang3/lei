@@ -1,11 +1,7 @@
 @import './common';
 
 html, body {
-    @base-page();
-}
-
-::-webkit-scrollbar {
-    display: none;
+    .base-page;
 }
 
 h1 {
@@ -23,12 +19,8 @@ a {
 }
 
 #content-0 {
-    .page-layout;
     top: 0vh;
-
-    p:nth-child(2) {
-        .main-icon;
-    }
+    .index-section;
 
     ul:first-child {
         @full-bar-dark();
@@ -52,54 +44,16 @@ a {
             width: 24px;
         }
     }
-
-    p:nth-child(4) {
-        max-width: 80vw;
-    }
-
-    p:last-child {
-        .page-nav-button;
-    }
 }
 
 #content-1 {
-    .page-layout;
     top: 100vh;
-
-    p:first-child {
-        .page-nav-button;
-    }
-
-    p:nth-child(2) {
-        .main-icon;
-    }
-
-    p:nth-child(4) {
-        max-width: 80vw;
-    }
-
-    p:last-child {
-        .page-nav-button;
-    }
+    .index-section;
+    .return-top;
 }
 
 #content-2 {
-    .page-layout;
     top: 200vh;
-
-    p:first-child {
-        .page-nav-button;
-    }
-
-    p:nth-child(2) {
-        .main-icon;
-    }
-
-    p:nth-child(4) {
-        max-width: 80vw;
-    }
-
-    p:last-child {
-        .page-nav-button;
-    }
+    .index-section;
+    .return-top;
 }
