@@ -1,7 +1,7 @@
 doctype html
 html[amp]
     == slim :"index_partials/index_head",
-            locals: { title: title, style: style }
+            locals: { title: title, style: style, url: url }
     body
         a[name="top"]
         - content.each_with_index do |part, i|

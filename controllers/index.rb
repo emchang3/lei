@@ -8,10 +8,10 @@ class IndexController < Sinatra::Base
     set :views, $views
 
     get "/" do
-        slim :index, locals: index_locals
+        slim :index, locals: { **index_locals, url: request.url }
     end
 
     not_found do
-        slim :not_found, locals: $utils.nf_404
+        slim :not_found, locals: { **$utils.nf_404, url: request.url }
     end
 end

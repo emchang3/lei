@@ -1,7 +1,11 @@
 puts "\t--- Helpers: Index ---"
 
 def index_locals
-    content = [ "#{$index_root}/above-fold.md", "#{$index_root}/lei.md", "#{$index_root}/internals.md" ]
+    content = [
+        "#{$index_root}/above-fold.md",
+        "#{$index_root}/lei.md",
+        "#{$index_root}/internals.md"
+    ]
 
     {
         title: "靁 - léi",

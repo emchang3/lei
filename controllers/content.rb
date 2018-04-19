@@ -20,7 +20,8 @@ class ContentController < Sinatra::Base
         slim :content, locals: {
             title: title,
             content: $utils.parse_md(contentList)[0],
-            style: $utils.load_css("content")
+            style: $utils.load_css("content"),
+            url: request.url
         }
     end
 
@@ -67,11 +68,12 @@ class ContentController < Sinatra::Base
             contentList: $utils.parse_md(contentList),
             page: page,
             pages: pages,
-            style: $utils.load_css("content")
+            style: $utils.load_css("content"),
+            url: request.url
         }
     end
 
     not_found do
-        slim :not_found, locals: $utils.nf_404
+        slim :not_found, locals: { **$utils.nf_404, url: request.url }
     end
 end
