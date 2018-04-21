@@ -1,15 +1,16 @@
-- <a href="/">&#9779;</a>
+- [☳][1]
 - CONTACT
-- [GITHUB][1]
+- [GITHUB][2]
 - DOCS
 
-&#38721;
+靁
 
 # léi
 
 A Sinatra-based springboard for AMP projects.
 
-[&#8615;][2]
+[↧][3]
 
-[1]: https://github.com/emchang3/lei
-[2]: #about
+[1]: /
+[2]: https://github.com/emchang3/lei
+[3]: #about
