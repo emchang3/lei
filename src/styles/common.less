@@ -32,7 +32,12 @@
 
 @full-page: {
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
+};
+
+@link-content: {
+    color: black;
+    font-weight: bold;
 };
 
 @link-ad: {
@@ -52,6 +57,11 @@
     align-items: center;
 };
 
+@std-content: {
+    max-width: 50em;
+    width: 80vw;
+};
+
 @std-padding: {
     padding: 1em;
 };
@@ -60,10 +70,16 @@
     margin: 0em;
 };
 
+.std-mp {
+    @std-margin();
+    @std-padding();
+};
+
 .base-page {
-    margin: 0em;
+    -webkit-tap-highlight-color: transparent;
     font-family: 'Lato', sans-serif;
     background-color: rgb(240, 240, 240);
+    @std-margin();
 
     &::-webkit-scrollbar {
         display: none;
@@ -79,10 +95,10 @@
     padding: 0em;
     
     a {
+        .std-mp;
         @anim-bg-color();
         @full-bar-light();
-        @std-margin();
-        @std-padding();
+        @link-al();
         bottom: 0vh;
         display: block;
         text-align: center;
@@ -98,14 +114,9 @@
 .index-section {
     @full-page();
     @spread-vert();
-    position: absolute;
 
     p:nth-child(2) {
         .main-icon;
-    }
-
-    p:nth-child(4) {
-        max-width: 80vw;
     }
 
     p:last-child {

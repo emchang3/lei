@@ -2,6 +2,7 @@
 
 html, body {
     .base-page;
+    @center-vert();
 }
 
 h1 {
@@ -9,23 +10,20 @@ h1 {
 }
 
 p {
-    @std-margin();
-    @std-padding();
+    .std-mp;
 }
 
 a {
-    @link-al();
     outline: transparent;
+    @link-content();
 }
 
 #content-0 {
-    top: 0vh;
     .index-section;
 
     ul:first-child {
+        .std-mp;
         @full-bar-dark();
-        @std-margin();
-        @std-padding();
 
         a {
             @link-ad();
@@ -44,16 +42,30 @@ a {
             width: 24px;
         }
     }
+
+    p:nth-child(4) {
+        @std-content();
+        text-align: center;
+    }
 }
 
 #content-1 {
-    top: 100vh;
     .index-section;
     .return-previous;
+
+    p:nth-child(4) {
+        @std-content();
+    }
 }
 
 #content-2 {
-    top: 200vh;
     .index-section;
     .return-previous;
+
+    ul,
+    p:nth-child(4),
+    p:nth-child(5),
+    p:nth-child(7) {
+        @std-content();
+    }
 }

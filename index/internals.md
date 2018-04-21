@@ -1,9 +1,27 @@
-<a name="internals" href="#about">⤉</a>
+<a name="internals" href="#about">↥</a>
 
 ⎄
 
 ## Internals
 
-Léi streamlines your workflow, combining best-in-class tools to make the task of presenting your content easy. The back end leverages the well-loved micro-framework Sinatra, which pumps your Markdown content through Slim templates, styled by compiled Less files. The basic markup necessary for AMP-valid pages are baked into Léi as globals to drop into your views. Most importantly, generators are available to easily stub out new content streams and custom pages. A Gulp task is ready for you to run to pick up changes in .less. Sugar, spice, and everything nice.
+Léi streamlines your workflow, combining best-in-class tools to make the task of presenting your content easy.
 
-(Link to Next | Bot Nav)
+From back to front:
+
+- [Sinatra][1]
+- [Markdown][2]
+- [Slim][3]
+- [AMP][4]
+- [Less][5]
+
+Additionally, generators are available to easily stub out new content streams and custom pages, and a [Gulp][6] task is ready to pick up changes in your .less. Read the docs here!
+
+[⤒][7]
+
+[1]: http://sinatrarb.com/
+[2]: https://www.markdownguide.org/
+[3]: http://slim-lang.com/
+[4]: https://www.ampproject.org/
+[5]: http://lesscss.org/
+[6]: https://gulpjs.com/
+[7]: #top
