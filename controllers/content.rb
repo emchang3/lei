@@ -11,24 +11,24 @@ class ContentController < Sinatra::Base
         title = params["title"]
         redirect 404 if title.nil? || title.length == 0
 
-        cl = get_content(title)
-        redirect 404 if cl.length != 1
+        content = get_content(title)
+        redirect 404 if content.length != 1
 
         slim :content, locals: {
             title: title,
-            content: $utils.parse_md(cl)[0],
+            content: $utils.parse_md(content)[0],
             style: $utils.load_css("content"),
             url: request.url
         }
     end
 
     get "/filterbydate" do
-        cl = date_filter(params)
-        redirect 404 if cl.length == 0
+        content = date_filter(params)
+        redirect 404 if content.length == 0
 
-        cl = time_sort(cl)
+        content = time_sort(content)
 
-        contentParts = page_slice(cl, params)
+        contentParts = page_slice(content, params)
 
         slim :content_many, locals: {
             **contentParts,

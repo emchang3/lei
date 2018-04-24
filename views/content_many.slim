@@ -6,6 +6,6 @@ html[amp]
         h1.content Search Results
         aside.content
             | Displaying page #{page} of #{pages}.
-        - for content in contentList
+        - for post in content
             section.content
-                == content
+                == post
