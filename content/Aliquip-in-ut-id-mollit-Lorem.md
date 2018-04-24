@@ -1,7 +1,5 @@
 # Aliquip in ut id mollit Lorem
 
-_11MAY2018_
-
 Ullamco exercitation elit Lorem id. Incididunt sunt ea laboris mollit anim Lorem ex consequat irure sint reprehenderit nulla minim. Adipisicing occaecat exercitation do minim id. Incididunt Lorem enim elit sunt. Exercitation esse ea elit adipisicing. Anim qui veniam eu deserunt nostrud. Consequat eiusmod fugiat dolore deserunt sit ullamco qui.
 
 Esse qui dolore id in non voluptate reprehenderit labore mollit. Culpa duis fugiat duis laborum sit incididunt in. Pariatur mollit non quis cupidatat do cupidatat pariatur dolor irure incididunt commodo culpa fugiat.

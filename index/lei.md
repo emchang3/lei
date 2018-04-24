@@ -4,7 +4,7 @@
 
 ## About
 
-"[靁][1]" is the Chinese character for "thunder," symbolized by rain over the fields. In Japanese, thunder is "kaminari," the cry of the gods. This project aims to enable you to simultaneously project your voice with power and nurture people with your words.
+"[靁][1]" is the Chinese character for "thunder," symbolized by rain over the fields. In Japanese, thunder is "kaminari," the cry of the gods. This project aims to empower you to project your voice with authority and nurture people with your words.
 
 [⤈][2]
 

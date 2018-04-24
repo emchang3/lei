@@ -1,7 +1,5 @@
 # Do nostrud sint ut ullamco ea ea
 
-_03APR2018_
-
 Exercitation deserunt eiusmod elit nostrud veniam ullamco anim Lorem minim quis quis quis eiusmod. Culpa nostrud aliqua id in laboris aliquip minim aliqua id minim. Cupidatat enim et est dolore cupidatat qui nisi id qui aliquip ullamco. Proident laborum in eiusmod tempor nisi in reprehenderit in ipsum. Magna labore minim occaecat dolore. Consectetur tempor amet amet enim elit Lorem.
 
 Excepteur veniam in nisi eiusmod. Cillum consequat veniam nulla ullamco ipsum magna in id est. Enim quis ex ullamco Lorem exercitation ad incididunt sunt voluptate sit. Ut proident cupidatat cupidatat dolore minim magna ipsum nostrud ex eu.
