@@ -2,7 +2,6 @@ puts "\t--- Helpers: Content ---"
 
 require "yaml"
 
-# http://localhost:4567/content/filter?term=they
 def filter_content(content, params)
     term = params["term"]
     if !term.nil? && term.length > 2

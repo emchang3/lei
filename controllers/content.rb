@@ -16,8 +16,8 @@ class ContentController < Sinatra::Base
 
         slim :content, locals: {
             **contentParts,
-            title: "Content",
             style: $utils.load_css("content"),
+            title: "Content",
             url: request.url
         }
     end
@@ -30,9 +30,9 @@ class ContentController < Sinatra::Base
         redirect 404 if content.length != 1
 
         slim :content, locals: {
-            title: title,
             content: $utils.parse_md(content)[0],
             style: $utils.load_css("content"),
+            title: title,
             url: request.url
         }
     end
@@ -48,8 +48,8 @@ class ContentController < Sinatra::Base
 
         slim :search_results, locals: {
             **contentParts,
-            title: "Filtered Results",
             style: $utils.load_css("content"),
+            title: "Filtered Results",
             url: request.url
         }
     end
