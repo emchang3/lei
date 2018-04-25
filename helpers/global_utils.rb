@@ -6,7 +6,11 @@ class GlobalUtils
         Dotenv.load
         self.declare_globals
 
-        @carpet = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
+        @carpet = Redcarpet::Markdown.new(Redcarpet::Render::HTML.new({
+            # fenced_code_blocks: true,
+            hard_wrap: true,
+            highlight: true
+        }))
     end
 
     def declare_globals

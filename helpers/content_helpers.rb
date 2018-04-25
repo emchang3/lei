@@ -2,25 +2,30 @@ puts "\t--- Helpers: Content ---"
 
 require "yaml"
 
-def date_filter(params)
-    content = get_content("")
+# http://localhost:4567/content/filter?term=they
+def filter_content(content, params)
+    term = params["term"]
+    if !term.nil? && term.length > 2
+        content.reject! do |c|
+            post = `cat #{c}`
+            !post.match?(Regexp.new(term, true))
+        end
+    end
 
-    year = params["year"]
-    return [] if !(content.length > 0) || year.nil? || year.length != 4
+    yyyy = params["year"]
+    if !yyyy.nil? && yyyy.length == 4
+        content.reject! { |c| File::Stat.new(c).mtime.year != yyyy.to_i }
+    end
 
-    content.reject! { |c| File::Stat.new(c).mtime.year != year.to_i }
+    mm = params["month"]
+    if !mm.nil? && mm.length == 2
+        content.reject! { |c| File::Stat.new(c).mtime.month != mm.to_i }
+    end
 
-    month = params["month"]
-    return content if !(content.length > 0) || month.nil? || month.length != 2
-
-    content.reject! { |c| File::Stat.new(c).mtime.month != month.to_i }
-
-    day = params["day"]
-    return content if !(content.length > 0) || day.nil? || day.length != 2
-
-    content.reject! { |c| File::Stat.new(c).mtime.day != day.to_i }
-
-    return content
+    dd = params["day"]
+    if !dd.nil? && dd.length == 2
+        content.reject! { |c| File::Stat.new(c).mtime.day != dd.to_i }
+    end
 end
 
 def page_slice(content, params)
@@ -39,7 +44,7 @@ end
 
 def time_sort(content)
     content.sort_by! { |c| File::Stat.new(c).mtime }
-    content.reverse
+    content.reverse!
 end
 
 def get_content(title)

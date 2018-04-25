@@ -1,0 +1,7 @@
+doctype html
+html[amp]
+    == slim :"content_partials/content_head",
+            locals: { title: title, style: style, url: url }
+    body
+        div.content
+            == content
