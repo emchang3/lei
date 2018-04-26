@@ -11,14 +11,16 @@ class ContentController < Sinatra::Base
         content = get_content("")
         redirect 404 if content.length == 0
 
+        url = request.url
+
         time_sort(content)
-        contentParts = page_slice(content, params)
+        contentParts = page_slice(content, params, url)
 
         slim :content, locals: {
             **contentParts,
             style: $utils.load_css("content"),
             title: "Content",
-            url: request.url
+            url: url
         }
     end
 
@@ -29,10 +31,12 @@ class ContentController < Sinatra::Base
         content = get_content(title)
         redirect 404 if content.length != 1
 
-        slim :content, locals: {
+        parsed_title = title.split("-").join(" ")
+
+        slim :post, locals: {
             content: $utils.parse_md(content)[0],
             style: $utils.load_css("content"),
-            title: title,
+            title: parsed_title,
             url: request.url
         }
     end
@@ -43,14 +47,16 @@ class ContentController < Sinatra::Base
         filter_content(content, params)
         redirect 404 if content.length == 0
 
+        url = request.url
+
         time_sort(content)
-        contentParts = page_slice(content, params)
+        contentParts = page_slice(content, params, url)
 
         slim :search_results, locals: {
             **contentParts,
             style: $utils.load_css("content"),
             title: "Filtered Results",
-            url: request.url
+            url: url
         }
     end
 

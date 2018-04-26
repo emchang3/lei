@@ -62,17 +62,12 @@
     width: 80vw;
 };
 
-@std-padding: {
-    padding: 1em;
-};
-
 @std-margin: {
     margin: 0em;
 };
 
-.std-mp {
-    @std-margin();
-    @std-padding();
+@std-padding: {
+    padding: 1em;
 };
 
 .base-page {
@@ -86,10 +81,23 @@
     }
 };
 
+.space-to-left {
+    padding-left: 1em;
+}
+
+.space-to-right {
+    padding-right: 1em;
+}
+
 .main-icon {
     @fs10();
     padding: 0em;
 }
+
+.std-mp {
+    @std-margin();
+    @std-padding();
+};
 
 .page-nav-button {
     padding: 0em;

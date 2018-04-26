@@ -1,0 +1,15 @@
+
+aside.content
+    - unless pageUrls[0].nil?
+        div.space-to-right
+            a[href=pageUrls[0]] = "<<"
+    - unless pageUrls[1].nil?
+        div.space-to-right
+            a[href=pageUrls[1]] = "<"
+    div Displaying page #{page} of #{pages}.
+    - unless pageUrls[2].nil?
+        div.space-to-left
+            a[href=pageUrls[2]] = ">"
+    - unless pageUrls[3].nil?
+        div.space-to-left
+            a[href=pageUrls[3]] = ">>"

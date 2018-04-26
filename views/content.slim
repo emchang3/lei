@@ -4,8 +4,8 @@ html[amp]
             locals: { title: title, style: style, url: url }
     body
         h1.content = title
-        aside.content
-            | Displaying page #{page} of #{pages}.
+        == slim :"content_partials/pagination",
+            locals: { page: page, pages: pages, pageUrls: pageUrls }
         - for post in content
             section.content
                 == post
