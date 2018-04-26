@@ -79,15 +79,26 @@
     &::-webkit-scrollbar {
         display: none;
     }
+
+    code {
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    pre {
+        code {
+            display: block;
+            @std-padding();
+        }
+    }
+
+    .space-to-left {
+        padding-left: 1em;
+    }
+    
+    .space-to-right {
+        padding-right: 1em;
+    }
 };
-
-.space-to-left {
-    padding-left: 1em;
-}
-
-.space-to-right {
-    padding-right: 1em;
-}
 
 .main-icon {
     @fs10();
