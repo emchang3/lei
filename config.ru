@@ -9,8 +9,13 @@ $root = File.dirname(__FILE__)
 
 # Global Settings and Utilities
 
-require "#{$root}/helpers/global_utils"
-$utils = GlobalUtils.new
+utils_root = "#{$root}/helpers"
+
+require "#{utils_root}/global_utils"
+GlobalUtils.declare_globals
+
+require "#{utils_root}/content_helpers"
+$cUtils = ContentHelpers.new
 
 # Sinatra Configuration
 

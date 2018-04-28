@@ -1,18 +1,11 @@
 require "dotenv"
-require "redcarpet"
 
-class GlobalUtils
-    def initialize
+module GlobalUtils
+    def self.declare_globals
+        puts "--- Loading Environment Variables ---"
+
         Dotenv.load
-        self.declare_globals
 
-        @carpet = Redcarpet::Markdown.new(Redcarpet::Render::HTML.new({
-            hard_wrap: true,
-            highlight: true
-        }))
-    end
-
-    def declare_globals
         puts "--- Declaring Globals ---"
         
         $assets_root = "#{$root}/static"
@@ -45,34 +38,5 @@ class GlobalUtils
         BOILER
 
         $amp_bind = "<script async custom-element=\"amp-bind\" src=\"https://cdn.ampproject.org/v0/amp-bind-0.1.js\"></script>"
-    end
-
-    <<~parse_md
-        This function takes a list of filenames, reads their contents, and
-        utilizes the Redcarpet gem to parse them into HTML.
-    parse_md
-
-    def parse_md(filenames)
-        filenames.map do |filename|
-            content = `cat #{filename}`
-            @carpet.render(content)
-        end
-    end
-
-    <<~load_css
-        This function reads and returns the contents of a CSS file as a string.
-        Its return value gets stored in a variable for ease of interpolation in
-        templates.
-    load_css
-
-    def load_css(filename)
-        `cat #{$style_root}/#{filename}.css`
-    end
-
-    def nf_404
-        {
-            title: "404: Not Found",
-            style: self.load_css("notfound")
-        }
     end
 end
