@@ -1,6 +1,5 @@
 puts "\t--- Helpers: Content ---"
 
-require "yaml"
 require "redcarpet"
 
 class ContentHelpers
@@ -38,17 +37,17 @@ class ContentHelpers
         end
     end
     
-    def get_content
-        all = Dir.glob("#{$content_root}/*.md")
+    def get_content(contentDir)
+        all = Dir.glob("#{contentDir}/*.md")
         classified = YAML.load_file($banlist)
     
         all - classified
     end
 
-    def get_post(title)
-        content = self.get_content
+    def get_post(contentDir, title)
+        content = self.get_content(contentDir)
 
-        post = "#{$content_root}/#{title}.md"
+        post = "#{contentDir}/#{title}.md"
 
         content.include?(post) ? [ post ] : []
     end

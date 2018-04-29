@@ -1,7 +1,8 @@
-require "sinatra"
-require "slim"
 require "rack/deflater"
 require "rack/protection"
+require "sinatra"
+require "slim"
+require "yaml"
 
 # Project Root
 
@@ -28,10 +29,11 @@ configure do
 end
 
 puts "--- Loading Controllers ---"
-    
-Dir.glob("#{$root}/controllers/*.rb") do |controller|
-    require controller
-end
 
-map("/") { run IndexController }
-map("/content") { run ContentController }
+controllers = YAML.load_file("#{$root}/controllers.yml")
+
+controllers.each do |controller|
+    require "#{$root}/controllers/#{controller["file"]}"
+    
+    map(controller["path"]) { run eval(controller["name"]) }
+end

@@ -23,4 +23,5 @@ class IndexController < Sinatra::Base
     not_found do
         slim :not_found, locals: { **$cUtils.nf_404, url: request.url }
     end
+    
 end
