@@ -13,15 +13,15 @@ class IndexController < Sinatra::Base
         ]
     
         slim :index, locals: {
-            content: $cUtils.parse_md(content),
-            style: $cUtils.load_css("index"),
+            content: ContentHelpers.parse_md(content),
+            style: ContentHelpers.load_css("index"),
             title: "靁 - léi",
             url: request.url
         }
     end
 
     not_found do
-        slim :not_found, locals: { **$cUtils.nf_404, url: request.url }
+        slim :not_found, locals: { **ContentHelpers.nf_404, url: request.url }
     end
     
 end

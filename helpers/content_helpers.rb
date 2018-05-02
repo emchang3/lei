@@ -2,17 +2,15 @@ puts "\t--- Helpers: Content ---"
 
 require "redcarpet"
 
-class ContentHelpers
-    def initialize
-        @carpet = Redcarpet::Markdown.new(
-            Redcarpet::Render::HTML.new({
-                hard_wrap: true,
-                highlight: true
-            })
-        )
-    end
+module ContentHelpers
+    CARPET = Redcarpet::Markdown.new(
+        Redcarpet::Render::HTML.new({
+            hard_wrap: true,
+            highlight: true
+        })
+    )
 
-    def filter_content(content, params)
+    def self.filter_content(content, params)
         term = params["term"]
         if !term.nil? && term.length > 2
             content.reject! do |c|
@@ -37,14 +35,14 @@ class ContentHelpers
         end
     end
     
-    def get_content(contentDir)
+    def self.get_content(contentDir)
         all = Dir.glob("#{contentDir}/*.md")
         classified = YAML.load_file($banlist)
     
         all - classified
     end
 
-    def get_post(contentDir, title)
+    def self.get_post(contentDir, title)
         content = self.get_content(contentDir)
 
         post = "#{contentDir}/#{title}.md"
@@ -52,14 +50,14 @@ class ContentHelpers
         content.include?(post) ? [ post ] : []
     end
 
-    def nf_404
+    def self.nf_404
         {
             title: "404: Not Found",
             style: self.load_css("notfound")
         }
     end
     
-    def paginate(content, params, url)
+    def self.paginate(content, params, url)
         pageParam = params["page"].to_i
     
         page = pageParam != 0 ? pageParam : 1
@@ -108,10 +106,10 @@ class ContentHelpers
         utilizes the Redcarpet gem to parse them into HTML.
     parse_md
 
-    def parse_md(filenames)
+    def self.parse_md(filenames)
         filenames.map do |filename|
             content = `cat #{filename}`
-            @carpet.render(content)
+            CARPET.render(content)
         end
     end
 
@@ -121,11 +119,11 @@ class ContentHelpers
         templates.
     load_css
 
-    def load_css(filename)
+    def self.load_css(filename)
         `cat #{$style_root}/#{filename}.css`
     end
     
-    def time_sort(content)
+    def self.time_sort(content)
         content.sort_by! { |c| File::Stat.new(c).mtime }
         content.reverse!
     end
