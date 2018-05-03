@@ -1,8 +1,8 @@
 -
-  path: /
-  name: IndexController
   file: index
+  name: IndexController
+  path: /
 -
-  path: /content
-  name: ContentController
   file: content
+  name: ContentController
+  path: /content
