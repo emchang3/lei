@@ -70,27 +70,17 @@ module ContentHelpers
         pageUrls = [ nil, nil, nil, nil ]
         
         if page > 1
-            firstParams = params.clone
-            firstParams["page"] = "1"
-            encodedFirst = URI.encode_www_form(firstParams)
-            pageUrls[0] = "#{path}?#{encodedFirst}"
-    
-            prevParams = params.clone
-            prevParams["page"] = (page - 1).to_s
-            encodedPrev = URI.encode_www_form(prevParams)
-            pageUrls[1] = "#{path}?#{encodedPrev}"
+            pageUrls[0] = self.mp_eu(path, params, { "page" => "1" })
+            
+            prev = (page - 1).to_s
+            pageUrls[1] = self.mp_eu(path, params, { "page" => prev })
         end
     
         if page < pages
-            nextParams = params.clone
-            nextParams["page"] = (page + 1).to_s
-            encodedNext = URI.encode_www_form(nextParams)
-            pageUrls[2] = "#{path}?#{encodedNext}"
-    
-            lastParams = params.clone
-            lastParams["page"] = pages.to_s
-            encodedLast = URI.encode_www_form(lastParams)
-            pageUrls[3] = "#{path}?#{encodedLast}"
+            foll = (page + 1).to_s
+            pageUrls[2] = self.mp_eu(path, params, { "page" => foll })
+
+            pageUrls[3] = self.mp_eu(path, params, { "page" => pages.to_s })
         end
     
         {
@@ -121,6 +111,15 @@ module ContentHelpers
 
     def self.load_css(filename)
         `cat #{$style_root}/#{filename}.css`
+    end
+
+    def self.mp_eu(path, params, replacement)
+        newParams = {}
+        params.each { |k, v| newParams[k] = v }
+        replacement.each { |i, j| newParams[i] = j }
+        encoded = URI.encode_www_form(newParams)
+        
+        "#{path}?#{encoded}"
     end
     
     def self.time_sort(content)
