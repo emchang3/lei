@@ -1,6 +1,7 @@
 require "dotenv"
 
 module GlobalUtils
+
     def self.declare_globals
         puts "--- Loading Environment Variables ---"
 
@@ -9,7 +10,6 @@ module GlobalUtils
         puts "--- Declaring Globals ---"
         
         $assets_root = "#{$root}/static"
-        $content_root = "#{$root}/content"
         $index_root = "#{$root}/index"
         $style_root = "#{$assets_root}/styles"
         $views = "#{$root}/views"

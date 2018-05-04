@@ -3,6 +3,7 @@ puts "\t--- Helpers: Content ---"
 require "redcarpet"
 
 module ContentHelpers
+
     CARPET = Redcarpet::Markdown.new(
         Redcarpet::Render::HTML.new({
             hard_wrap: true,
@@ -48,6 +49,25 @@ module ContentHelpers
         post = "#{contentDir}/#{title}.md"
 
         content.include?(post) ? [ post ] : []
+    end
+
+    <<~load_css
+        This function reads and returns the contents of a CSS file as a string.
+        Its return value gets stored in a variable for ease of interpolation in
+        templates.
+    load_css
+
+    def self.load_css(filename)
+        `cat #{$style_root}/#{filename}.css`
+    end
+
+    def self.mp_eu(path, params, replacement)
+        newParams = {}
+        params.each { |k, v| newParams[k] = v }
+        replacement.each { |i, j| newParams[i] = j }
+        encoded = URI.encode_www_form(newParams)
+        
+        "#{path}?#{encoded}"
     end
 
     def self.nf_404
@@ -102,28 +122,10 @@ module ContentHelpers
             CARPET.render(content)
         end
     end
-
-    <<~load_css
-        This function reads and returns the contents of a CSS file as a string.
-        Its return value gets stored in a variable for ease of interpolation in
-        templates.
-    load_css
-
-    def self.load_css(filename)
-        `cat #{$style_root}/#{filename}.css`
-    end
-
-    def self.mp_eu(path, params, replacement)
-        newParams = {}
-        params.each { |k, v| newParams[k] = v }
-        replacement.each { |i, j| newParams[i] = j }
-        encoded = URI.encode_www_form(newParams)
-        
-        "#{path}?#{encoded}"
-    end
     
     def self.time_sort(content)
         content.sort_by! { |c| File::Stat.new(c).mtime }
         content.reverse!
     end
+
 end

@@ -1,3 +1,4 @@
+---
 -
   file: index
   name: IndexController
@@ -6,3 +7,4 @@
   file: content
   name: ContentController
   path: /content
+...
