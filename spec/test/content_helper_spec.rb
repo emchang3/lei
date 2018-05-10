@@ -23,13 +23,13 @@ RSpec.describe "Tests Module: ContentHelpers" do
         expect(content.last).to eq "#{fixtures}/md-1.md"
     end
 
-    it "Tests method get_content: Correctly retrieves content" do
-        just6 = []
-        for i in 1..7
-            just6 << "#{fixtures}/md-#{i}.md" if i != 2
-        end
-        ContentHelpers.time_sort(just6)
+    just6 = []
+    for i in 1..7
+        just6 << "#{fixtures}/md-#{i}.md" if i != 2
+    end
+    ContentHelpers.time_sort(just6)
 
+    it "Tests method get_content: Correctly retrieves content" do
         expect(content.length).to eq 6
         expect(content).to eq just6
     end
@@ -61,6 +61,49 @@ RSpec.describe "Tests Module: ContentHelpers" do
 
         expect(newUrl).not_to eq "#{path}?action=add&mode=test"
         expect(newUrl).to eq "#{path}?action=remove&mode=test"
+    end
+
+    it "Tests method paginate: Correctly retrieves first page" do
+        params = {}
+        paginated = ContentHelpers.paginate(just6, params, path)
+
+        expect(paginated[:page]).to eq 1
+        expect(paginated[:pages]).to eq 2
+        expect(paginated[:content].length).to eq 5
+        expect(paginated[:pageUrls]).to eq [
+            nil,
+            nil,
+            "/fake?page=2",
+            "/fake?page=2"
+        ]
+
+        params2 = { "page" => "1" }
+        paginated2 = ContentHelpers.paginate(just6, params2, path)
+
+        expect(paginated2[:page]).to eq 1
+        expect(paginated2[:pages]).to eq 2
+        expect(paginated2[:content].length).to eq 5
+        expect(paginated2[:pageUrls]).to eq [
+            nil,
+            nil,
+            "/fake?page=2",
+            "/fake?page=2"
+        ]
+    end
+
+    it "Tests method paginate: Correctly retrieves second page" do
+        params = { "page" => "2" }
+        paginated = ContentHelpers.paginate(just6, params, path)
+
+        expect(paginated[:page]).to eq 2
+        expect(paginated[:pages]).to eq 2
+        expect(paginated[:content].length).to eq 1
+        expect(paginated[:pageUrls]).to eq [
+            "/fake?page=1",
+            "/fake?page=1",
+            nil,
+            nil
+        ]
     end
 
 end
