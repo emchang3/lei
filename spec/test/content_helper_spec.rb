@@ -19,8 +19,8 @@ RSpec.describe "Tests Module: ContentHelpers" do
     it "Tests method time_sort: Correctly sorts by mtime" do
         ContentHelpers.time_sort(content)
 
-        expect(content.first).to eq "#{fixtures}/md-7.md"
-        expect(content.last).to eq "#{fixtures}/md-1.md"
+        expect(content.first).to eq "#{fixtures}/md-1.md"
+        expect(content.last).to eq "#{fixtures}/md-3.md"
     end
 
     just6 = []
@@ -104,6 +104,61 @@ RSpec.describe "Tests Module: ContentHelpers" do
             nil,
             nil
         ]
+    end
+
+    it "Tests method filter_content: Correctly filters on term" do
+        params = { "term" => "third" }
+        filtered = just6.clone
+        ContentHelpers.filter_content(filtered, params)
+
+        expect(filtered.length).to eq 1
+        expect(filtered[0]).to eq "#{fixtures}/md-3.md"
+    end
+
+    it "Tests method filter_content: Correctly filters on year" do
+        params = { "year" => "2018" }
+        filtered = just6.clone
+        ContentHelpers.filter_content(filtered, params)
+
+        expect(filtered.length).to eq 6
+
+        params2 = { "year" => "2017" }
+        ContentHelpers.filter_content(filtered, params2)
+
+        expect(filtered.length).to eq 0
+    end
+
+    it "Tests method filter_content: Correctly filters on month" do
+        params = { "year" => "2018", "month" => "05" }
+        filtered = just6.clone
+        ContentHelpers.filter_content(filtered, params)
+
+        expect(filtered.length).to eq 6
+
+        params2 = { "year" => "2018", "month" => "04" }
+        ContentHelpers.filter_content(filtered, params2)
+
+        expect(filtered.length).to eq 0
+    end
+
+    it "Tests method filter_content: Correctly filters on day" do
+        params = { "year" => "2018", "month" => "05", "day" => "03" }
+        filtered = just6.clone
+        ContentHelpers.filter_content(filtered, params)
+
+        expect(filtered.length).to eq 4
+
+        params2 = { "year" => "2018", "month" => "05", "day" => "10" }
+        filtered2 = just6.clone
+        ContentHelpers.filter_content(filtered2, params2)
+
+        expect(filtered2.length).to eq 1
+
+        params3 = { "year" => "2018", "month" => "05", "day" => "04" }
+        filtered3 = just6.clone
+        ContentHelpers.filter_content(filtered3, params3)
+
+        expect(filtered3.length).to eq 1
     end
 
 end
