@@ -161,4 +161,16 @@ RSpec.describe "Tests Module: ContentHelpers" do
         expect(filtered3.length).to eq 1
     end
 
+    it "Tests method parse_md: Correctly generates HTML from Markdown" do
+        converted = ContentHelpers.parse_md([ "#{fixtures}/md-1.md" ])
+
+        expect(converted[0]).to eq "<h1>Markdown 1st</h1>\n"
+    end
+
+    it "Tests method load_css: Correctly returns CSS file contents" do
+        processed = ContentHelpers.load_css("test")
+
+        expect(processed).to eq ".mock{display: none;}"
+    end
+
 end
