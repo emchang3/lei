@@ -1,13 +1,15 @@
+puts "\tHelper: Global Utilities"
+
 require "dotenv"
 
 module GlobalUtils
 
     def self.declare_globals
-        puts "--- Loading Environment Variables ---"
+        puts "\t\t--- Loading Environment Variables ---"
 
         Dotenv.load
 
-        puts "--- Declaring Globals ---"
+        puts "\t\t--- Declaring Globals ---"
         
         $assets_root = "#{$root}/static"
         $style_root = "#{$assets_root}/styles"

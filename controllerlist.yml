@@ -1,7 +1,7 @@
 ---
 -
-  file: index
-  name: IndexController
+  file: custom
+  name: CustomController
   path: /
 -
   file: content

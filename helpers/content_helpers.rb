@@ -1,4 +1,4 @@
-puts "\t--- Helpers: Content ---"
+puts "\tHelper: Content"
 
 require "redcarpet"
 

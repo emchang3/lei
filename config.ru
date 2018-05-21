@@ -10,6 +10,8 @@ $root = File.dirname(__FILE__)
 
 # Global Settings and Utilities
 
+puts "--- Loading Helpers ---"
+
 utils_root = "#{$root}/helpers"
 
 require "#{utils_root}/global_utils"
