@@ -29,7 +29,7 @@ end
 
 puts "--- Loading Controllers ---"
 
-controllers = YAML.load_file("#{$root}/controllers.yml")
+controllers = YAML.load_file("#{$root}/controllerlist.yml")
 
 controllers.each do |controller|
     require "#{$root}/controllers/#{controller["file"]}"

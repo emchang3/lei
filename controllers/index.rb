@@ -6,10 +6,12 @@ class IndexController < Sinatra::Base
     set :views, $views
 
     get "/" do
+        index = "#{$root}/index"
+
         content = [
-            "#{$index_root}/above-fold.md",
-            "#{$index_root}/lei.md",
-            "#{$index_root}/internals.md"
+            "#{index}/above-fold.md",
+            "#{index}/lei.md",
+            "#{index}/internals.md"
         ]
     
         slim :index, locals: {

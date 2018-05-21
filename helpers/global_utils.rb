@@ -10,7 +10,6 @@ module GlobalUtils
         puts "--- Declaring Globals ---"
         
         $assets_root = "#{$root}/static"
-        $index_root = "#{$root}/index"
         $style_root = "#{$assets_root}/styles"
         $views = "#{$root}/views"
 

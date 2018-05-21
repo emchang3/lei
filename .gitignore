@@ -6,7 +6,7 @@ nohup.out
 *.pem
 *.cert
 
-# Mac File System Artefacts
+# Mac File System Artifacts
 .DS_Store
 
 # Node.js Dependencies
