@@ -27,7 +27,7 @@ class CustomController < Sinatra::Base
     end
 
     not_found do
-        slim :not_found, locals: { **ContentHelpers.nf_404, url: request.url }
+        slim :notfound, locals: { **ContentHelpers.nf_404, url: request.url }
     end
 
 end
