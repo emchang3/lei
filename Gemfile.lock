@@ -6,7 +6,7 @@ GEM
     mustermann (1.0.2)
     puma (3.11.3)
     rack (2.0.4)
-    rack-protection (2.0.1)
+    rack-protection (2.0.3)
       rack
     rake (12.3.1)
     redcarpet (3.4.0)
@@ -23,10 +23,10 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.7.0)
     rspec-support (3.7.1)
-    sinatra (2.0.1)
+    sinatra (2.0.3)
       mustermann (~> 1.0)
       rack (~> 2.0)
-      rack-protection (= 2.0.1)
+      rack-protection (= 2.0.3)
       tilt (~> 2.0)
     slim (3.0.9)
       temple (>= 0.7.6, < 0.9)
@@ -44,7 +44,7 @@ DEPENDENCIES
   rake (~> 12.3.1)
   redcarpet (~> 3.4.0)
   rspec (~> 3.7.0)
-  sinatra (~> 2.0.1)
+  sinatra (~> 2.0.3)
   slim (~> 3.0.9)
 
 BUNDLED WITH
