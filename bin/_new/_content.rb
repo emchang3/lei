@@ -8,20 +8,20 @@ def add_new(name)
     controllerName = "#{name}Controller"
     downcasedName = name.downcase
 
-    newContent = <<~COPY
-    require "\#{$root}/controllers/content"
+    contentController = <<~CONTENT
+        require "\#{$root}/controllers/content"
 
-    puts "\\tController: #{name}"
+        puts "\\tController: #{name}"
 
-    class #{controllerName} < ContentController
-        
-        set :content_dir, "\#{$root}/#{downcasedName}"
-        set :stylesheet, "content"
-        set :public_folder, $assets_root
-        set :views, $views
+        class #{controllerName} < ContentController
+            
+            set :content_dir, "\#{$root}/#{downcasedName}"
+            set :stylesheet, "content"
+            set :public_folder, $assets_root
+            set :views, $views
 
-    end
-    COPY
+        end
+    CONTENT
 
     cwd = Dir.pwd
     controllers = YAML.load_file("#{cwd}/controllerlist.yml")
@@ -36,5 +36,5 @@ def add_new(name)
     `echo '#{controllers.to_yaml}' > #{cwd}/controllerlist.yml`
     `mkdir #{cwd}/#{downcasedName}`
     `echo '# #{downcasedName}' > #{cwd}/#{downcasedName}/#{downcasedName}.md`
-    `echo '#{newContent}' > #{cwd}/controllers/#{downcasedName}.rb`
+    `echo '#{contentController}' > #{cwd}/controllers/#{downcasedName}.rb`
 end

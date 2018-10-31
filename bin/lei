@@ -11,6 +11,19 @@ class Lei
         ]
     end
 
+    def help
+        puts <<~MAN
+
+            Usage: lei @(content|custom|help|install) ?(ARG)
+
+            `content`: Generates new serial, filterable content section with pagination. `ARG`: Content subject; should be camel-case!
+            `custom`: Generates a single, new, custom page. `ARG`: Page subject.
+            `help`: Get info about Lei and its commands.
+            `install`: Generates a brand-new installation of Lei.
+
+        MAN
+    end
+
     def install
         require "#{@root}/_app/_root.rb"
     
@@ -27,7 +40,10 @@ class Lei
         arg0 = ARGV[0]
     
         if !@validArg0.include?(arg0)
-            puts "Invalid first argument: #{arg0}." and return
+            puts "Invalid first argument: `#{arg0}`."
+            puts "Use argument `help` to get info about Lei and its commands."
+            
+            return
         end
     
         case arg0
@@ -37,6 +53,8 @@ class Lei
             require "#{@root}/_new/_#{arg0}"
     
             add_new(ARGV[1])
+        when "help"
+            help
         else
             puts "Not yet implemented."
         end
