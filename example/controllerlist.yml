@@ -7,4 +7,8 @@
   file: content
   name: ContentController
   path: /content
+-
+  file: test
+  name: TestController
+  path: /test
 ...

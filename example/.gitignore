@@ -1,14 +1,3 @@
-# Set by Bundler on Gem Initialization
-
-/.bundle/
-/.yardoc
-/_yardoc/
-/coverage/
-/doc/
-/pkg/
-/spec/reports/
-/tmp/
-
 # Environment Variables
 .env
 nohup.out

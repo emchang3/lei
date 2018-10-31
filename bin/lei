@@ -1,0 +1,47 @@
+#!/usr/bin/env ruby
+
+class Lei
+    def initialize
+        @root = File.dirname(File.absolute_path(__FILE__))
+        @validArg0 = [
+            "content",
+            "custom",
+            "help",
+            "install"
+        ]
+    end
+
+    def install
+        require "#{@root}/_app/_root.rb"
+    
+        Dir.glob("#{@root}/_app/_*.rb").each { |f| require f }
+    
+        `bundle install`
+        `npm install`
+        `npm install -g gulp-cli`
+        `gulp shrink`
+        `chmod +x launch.sh`
+    end
+
+    def go
+        arg0 = ARGV[0]
+    
+        if !@validArg0.include?(arg0)
+            puts "Invalid first argument: #{arg0}." and return
+        end
+    
+        case arg0
+        when "install"
+            install
+        when "content", "custom"
+            require "#{@root}/_new/_#{arg0}"
+    
+            add_new(ARGV[1])
+        else
+            puts "Not yet implemented."
+        end
+    end
+end
+
+lei = Lei.new
+lei.go

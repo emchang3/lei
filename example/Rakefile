@@ -1,0 +1,21 @@
+task default: []
+
+task :test do
+    puts `rspec --tty --color`
+end
+
+task :new, [ :task ] do |task, args|
+    puts "--- task: #{task}"
+
+    task = args.task
+    
+    if !task
+        puts "Missing argument: `task`."
+        return
+    end
+
+    rakeRoot = File.dirname(__FILE__)
+
+    require "#{rakeRoot}/bin/generate_app"
+    
+end
