@@ -145,6 +145,10 @@ welcome = <<~WELCOME
             @fs2();
             @fw300();
         }
+
+        p {
+            text-align: center;
+        }
     }
 WELCOME
 

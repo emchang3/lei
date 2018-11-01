@@ -5,13 +5,15 @@ def add_new(name)
         puts "Invalid custom page name." and return
     end
 
-    controllerName = "#{name}Controller"
+    name = name.split(" ")[0]
     downcasedName = name.downcase
+    capitalizedName = name.capitalize
+    controllerName = "#{capitalizedName}Controller"
 
     contentController = <<~CONTENT
         require "\#{$root}/controllers/content"
 
-        puts "\\tController: #{name}"
+        puts "\\tController: #{capitalizedName}"
 
         class #{controllerName} < ContentController
             
@@ -22,6 +24,8 @@ def add_new(name)
 
         end
     CONTENT
+
+    initialContent = "# #{capitalizedName}\nYour content goes here."
 
     cwd = Dir.pwd
     controllers = YAML.load_file("#{cwd}/controllerlist.yml")
@@ -35,6 +39,6 @@ def add_new(name)
 
     `echo '#{controllers.to_yaml}' > #{cwd}/controllerlist.yml`
     `mkdir #{cwd}/#{downcasedName}`
-    `echo '# #{downcasedName}' > #{cwd}/#{downcasedName}/#{downcasedName}.md`
+    `echo '#{initialContent}' > #{cwd}/#{downcasedName}/#{downcasedName}.md`
     `echo '#{contentController}' > #{cwd}/controllers/#{downcasedName}.rb`
 end

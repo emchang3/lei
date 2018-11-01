@@ -5,15 +5,18 @@ def add_new(name)
         puts "Invalid custom page name." and return
     end
 
-    cwd = Dir.pwd
+    name = name.split(" ")[0]
     downcasedName = name.downcase
+    capitalizedName = name.capitalize
+
+    cwd = Dir.pwd
     custom = YAML.load_file("#{cwd}/customlist.yml")
     custom.select! { |c| c["file"] != downcasedName }
 
     custom << {
         "name" => downcasedName,
         "path" => "/#{downcasedName}",
-        "title" => name,
+        "title" => capitalizedName,
         "content" => [ "#{downcasedName}.md" ]
     }
 
@@ -50,12 +53,18 @@ def add_new(name)
                 @fs2();
                 @fw300();
             }
+
+            p {
+                text-align: center;
+            }
         }
     STYLE
 
+    initialContent = "# #{capitalizedName}\nYour content goes here."
+
     `echo '#{custom.to_yaml}' > #{cwd}/customlist.yml`
     `mkdir #{cwd}/#{downcasedName}`
-    `echo '# #{name}' > #{cwd}/#{downcasedName}/#{downcasedName}.md`
+    `echo '#{initialContent}' > #{cwd}/#{downcasedName}/#{downcasedName}.md`
     `echo '#{customView}' > #{cwd}/views/#{downcasedName}.slim`
     `echo '#{customStyle}' > #{cwd}/src/styles/#{downcasedName}.less`
     `gulp shrink`
