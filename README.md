@@ -10,9 +10,9 @@ $ gem install lei
 
 ## Usage
 
-```
-$ lei install
-```
+1. `cd path/to/project`
+2. `lei install`
+3. `./launch 4567`
 
 ## Contributing
 
