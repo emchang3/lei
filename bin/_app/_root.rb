@@ -75,12 +75,24 @@ customlist = <<~CUSTOMLIST
     ...
 CUSTOMLIST
 
+dockerfile = <<~DOCKERFILE
+    FROM starefossen/ruby-node:2-10-alpine
+
+    WORKDIR #{`pwd`}
+    COPY . .
+
+    RUN gem install bundler
+    RUN gem install lei
+
+    CMD [ "lei", "install_deps" ]
+DOCKERFILE
+
 gems = <<~GEMS
     source "https://rubygems.org"
 
     gem "dotenv",       "~>2.2.1"
     gem "puma",         "~>3.11.3"
-    gem "rack",         "~>2.0.4"
+    gem "rack",         "~>2.0.6"
     gem "rake",         "~>12.3.1"
     gem "redcarpet",    "~>3.4.0"
     gem "rspec",        "~>3.7.0"
@@ -190,6 +202,7 @@ files = {
     "config.ru": config,
     "controllerlist.yml": controllerlist,
     "customlist.yml": customlist,
+    "Dockerfile": dockerfile,
     "Gemfile": gems,
     "gulpfile.js": gulp,
     "launch.sh": launch,

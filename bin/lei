@@ -20,6 +20,7 @@ class Lei
             `custom`: Generates a single, new, custom page. `ARG`: Page subject.
             `help`: Get info about Lei and its commands.
             `install`: Generates a brand-new installation of Lei.
+            `install_deps`: Installs dependencies only, for use with existing app.
 
         MAN
     end
@@ -29,6 +30,10 @@ class Lei
     
         Dir.glob("#{@root}/_app/_*.rb").each { |f| require f }
     
+        install_deps
+    end
+
+    def install_deps
         `bundle install`
         `npm install`
         `npm install -g gulp-cli`
@@ -53,6 +58,8 @@ class Lei
             require "#{@root}/_new/_#{arg0}"
     
             add_new(ARGV[1])
+        when "deps"
+            install_deps
         when "help"
             help
         else
