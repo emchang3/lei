@@ -8,7 +8,7 @@ task :new, [ :task ] do |task, args|
     puts "--- task: #{task}"
 
     task = args.task
-    
+
     if !task
         puts "Missing argument: `task`."
         return
@@ -17,5 +17,5 @@ task :new, [ :task ] do |task, args|
     rakeRoot = File.dirname(__FILE__)
 
     require "#{rakeRoot}/bin/generate_app"
-    
+
 end

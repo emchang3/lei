@@ -24,7 +24,7 @@ require "#{utils_root}/content_helpers"
 configure do
     use Rack::Deflater
     use Rack::Protection, except: [ :remote_token, :session_hijacking ]
-    
+
     set :server, :puma
     set :bind, "0.0.0.0"
 end
@@ -35,6 +35,6 @@ controllers = YAML.load_file("#{$root}/controllerlist.yml")
 
 controllers.each do |controller|
     require "#{$root}/controllers/#{controller["file"]}"
-    
+
     map(controller["path"]) { run eval(controller["name"]) }
 end

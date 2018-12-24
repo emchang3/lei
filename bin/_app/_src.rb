@@ -140,7 +140,7 @@ welcome = <<~WELCOME
             @fw300();
             text-align: center;
         }
-    
+
         h2 {
             @fs2();
             @fw300();

@@ -1,7 +1,7 @@
 puts "\tController: Custom"
 
 class CustomController < Sinatra::Base
-    
+
     set :public_folder, $assets_root
     set :views, $views
 

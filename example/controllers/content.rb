@@ -1,7 +1,7 @@
 puts "\tController: Content"
 
 class ContentController < Sinatra::Base
-    
+
     set :content_dir, "#{$root}/content"
     set :stylesheet, "content"
     set :public_folder, $assets_root
