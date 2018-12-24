@@ -6,30 +6,33 @@ class Lei
         @validArg0 = [
             "content",
             "custom",
+            "docker_deploy",
             "help",
-            "install"
+            "install",
+            "install_deps"
         ]
     end
 
     def help
         puts <<~MAN
 
-            Usage: lei @(content|custom|help|install) ?(ARG)
+            Usage: lei @(content|custom|help|install|install_deps|docker_deploy) ?(ARG) ?(ARG)
 
             `content`: Generates new serial, filterable content section with pagination. `ARG`: Content subject; should be camel-case!
             `custom`: Generates a single, new, custom page. `ARG`: Page subject.
             `help`: Get info about Lei and its commands.
             `install`: Generates a brand-new installation of Lei.
             `install_deps`: Installs dependencies only, for use with existing app.
+            `docker_deploy`: Builds Docker image based on Dockerfile and deploys image to your registry (requires Docker).
 
         MAN
     end
 
     def install
         require "#{@root}/_app/_root.rb"
-    
+
         Dir.glob("#{@root}/_app/_*.rb").each { |f| require f }
-    
+
         install_deps
     end
 
@@ -41,25 +44,55 @@ class Lei
         `chmod +x launch.sh`
     end
 
+    def docker_deploy
+        require "#{@root}/docker_utils"
+
+        if !dockerExists
+            puts "Docker does not exist; please install it before running this command."
+
+            return
+        end
+
+        arg1 = ARGV[1]
+        arg2 = ARGV[2]
+
+        if !dockerNameArgIsValid(arg1)
+            puts "Please supply project name (one word, alphanumeric only, _ allowed)."
+
+            return
+        end
+
+        if !dockerVersionArgIsValid(arg2)
+            puts "Invalid version format; please adhere to SemVer (Major.Minor.Patch)."
+
+            return
+        end
+
+        `docker build -t #{arg1}:#{arg2} .`
+        `docker push #{arg1}:#{arg2}`
+    end
+
     def go
         arg0 = ARGV[0]
-    
+
         if !@validArg0.include?(arg0)
             puts "Invalid first argument: `#{arg0}`."
             puts "Use argument `help` to get info about Lei and its commands."
-            
+
             return
         end
-    
+
         case arg0
         when "install"
             install
+        when "install_deps"
+            install_deps
+        when "docker_deploy"
+            docker_deploy
         when "content", "custom"
             require "#{@root}/_new/_#{arg0}"
-    
+
             add_new(ARGV[1])
-        when "deps"
-            install_deps
         when "help"
             help
         else

@@ -76,15 +76,19 @@ customlist = <<~CUSTOMLIST
 CUSTOMLIST
 
 dockerfile = <<~DOCKERFILE
-    FROM starefossen/ruby-node:2-10-alpine
+    FROM starefossen/ruby-node:2-10
 
-    WORKDIR #{`pwd`}
-    COPY . .
-
-    RUN gem install bundler
     RUN gem install lei
 
-    CMD [ "lei", "install_deps" ]
+    WORKDIR /Users/EMC3/Projects/test
+
+    COPY . .
+
+    RUN bundle install
+
+    EXPOSE 80
+
+    CMD puma -b tcp://0.0.0.0:80
 DOCKERFILE
 
 gems = <<~GEMS
