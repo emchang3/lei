@@ -60,7 +60,7 @@ def add_new(name)
         }
     STYLE
 
-    initialContent = "# #{capitalizedName}\nYour content goes here."
+    initialContent = "# #{capitalizedName}\n\nYour content goes here."
 
     `echo '#{custom.to_yaml}' > #{cwd}/customlist.yml`
     `mkdir #{cwd}/#{downcasedName}`
