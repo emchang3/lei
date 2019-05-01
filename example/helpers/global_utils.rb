@@ -16,6 +16,8 @@ module GlobalUtils
         $views = "#{$root}/views"
 
         $banlist = "#{$root}/banlist.yml"
+        $contentDirs = "#{$root}/contentlist.yml"
+        $bannedChars = "#{$root}/illegalchars.yml"
 
         <<~AMP
             AMP Static Header Parts, as of 15 APR 2018:
@@ -39,6 +41,18 @@ module GlobalUtils
         BOILER
 
         $amp_bind = "<script async custom-element=\"amp-bind\" src=\"https://cdn.ampproject.org/v0/amp-bind-0.1.js\"></script>"
+    end
+
+    def self.assemble_query(params)
+        return "" if params.nil? || params.length == 0
+
+        queryString = ""
+        params.each_index do |idx|
+            sym = idx == 0 ? "?" : "&"
+            queryString += "#{sym}#{params[idx]}"
+        end
+
+        return queryString
     end
 
 end

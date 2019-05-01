@@ -12,15 +12,8 @@ RSpec.describe "Tests Module: ContentHelpers" do
     content = ContentHelpers.get_content(fixtures)
 
     it "Tests variable $banlist: Verifies exclusion" do
-        expect(content.length).not_to eq 7
+        expect(content.length).to eq 6
         expect(content).not_to include "#{fixtures}/md-2.md"
-    end
-
-    it "Tests method time_sort: Correctly sorts by mtime" do
-        ContentHelpers.time_sort(content)
-
-        expect(content.first).to eq "#{fixtures}/md-1.md"
-        expect(content.last).to eq "#{fixtures}/md-3.md"
     end
 
     just6 = []
@@ -28,11 +21,6 @@ RSpec.describe "Tests Module: ContentHelpers" do
         just6 << "#{fixtures}/md-#{i}.md" if i != 2
     end
     ContentHelpers.time_sort(just6)
-
-    it "Tests method get_content: Correctly retrieves content" do
-        expect(content.length).to eq 6
-        expect(content).to eq just6
-    end
 
     it "Tests method get_post: Correctly retrieves post" do
         post = ContentHelpers.get_post(fixtures, "md-4")
@@ -115,52 +103,6 @@ RSpec.describe "Tests Module: ContentHelpers" do
         expect(filtered[0]).to eq "#{fixtures}/md-3.md"
     end
 
-    it "Tests method filter_content: Correctly filters on year" do
-        params = { "year" => "2018" }
-        filtered = just6.clone
-        ContentHelpers.filter_content(filtered, params)
-
-        expect(filtered.length).to eq 6
-
-        params2 = { "year" => "2017" }
-        ContentHelpers.filter_content(filtered, params2)
-
-        expect(filtered.length).to eq 0
-    end
-
-    it "Tests method filter_content: Correctly filters on month" do
-        params = { "year" => "2018", "month" => "05" }
-        filtered = just6.clone
-        ContentHelpers.filter_content(filtered, params)
-
-        expect(filtered.length).to eq 6
-
-        params2 = { "year" => "2018", "month" => "04" }
-        ContentHelpers.filter_content(filtered, params2)
-
-        expect(filtered.length).to eq 0
-    end
-
-    it "Tests method filter_content: Correctly filters on day" do
-        params = { "year" => "2018", "month" => "05", "day" => "03" }
-        filtered = just6.clone
-        ContentHelpers.filter_content(filtered, params)
-
-        expect(filtered.length).to eq 4
-
-        params2 = { "year" => "2018", "month" => "05", "day" => "10" }
-        filtered2 = just6.clone
-        ContentHelpers.filter_content(filtered2, params2)
-
-        expect(filtered2.length).to eq 1
-
-        params3 = { "year" => "2018", "month" => "05", "day" => "04" }
-        filtered3 = just6.clone
-        ContentHelpers.filter_content(filtered3, params3)
-
-        expect(filtered3.length).to eq 1
-    end
-
     it "Tests method parse_md: Correctly generates HTML from Markdown" do
         converted = ContentHelpers.parse_md([ "#{fixtures}/md-1.md" ])
 
@@ -170,7 +112,7 @@ RSpec.describe "Tests Module: ContentHelpers" do
     it "Tests method load_css: Correctly returns CSS file contents" do
         processed = ContentHelpers.load_css("test")
 
-        expect(processed).to eq ".mock{display: none;}"
+        expect(processed).to eq ".mock{display: none;}\n"
     end
 
 end

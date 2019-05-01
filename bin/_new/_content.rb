@@ -25,9 +25,10 @@ def add_new(name)
         end
     CONTENT
 
-    initialContent = "# #{capitalizedName}\nYour content goes here."
+    initialContent = "# #{capitalizedName}\n\nYour content goes here."
 
     cwd = Dir.pwd
+
     controllers = YAML.load_file("#{cwd}/controllerlist.yml")
     controllers.select! { |c| c["file"] != downcasedName }
 
@@ -37,7 +38,17 @@ def add_new(name)
         "path" => "/#{downcasedName}"
     }
 
+    controllers.sort! { |a, b| a["file"] <=> b["file"] }
+
+    content = YAML.load_file("#{cwd}/contentlist.yml")
+    content.select! { |c| c != downcasedName }
+
+    content << downcasedName
+
+    content.sort!
+
     `echo '#{controllers.to_yaml}' > #{cwd}/controllerlist.yml`
+    `echo '#{content.to_yaml}' > #{cwd}/contentlist.yml`
     `mkdir #{cwd}/#{downcasedName}`
     `echo '#{initialContent}' > #{cwd}/#{downcasedName}/#{downcasedName}.md`
     `echo '#{contentController}' > #{cwd}/controllers/#{downcasedName}.rb`

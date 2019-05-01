@@ -51,6 +51,13 @@ config = <<~CONFIG
     end
 CONFIG
 
+contentlist = <<~CONTENTLIST
+    ---
+    - content
+    - welcome
+    ...
+CONTENTLIST
+
 controllerlist = <<~CONTROLLERLIST
     ---
     -
@@ -61,6 +68,10 @@ controllerlist = <<~CONTROLLERLIST
       file: content
       name: ContentController
       path: /content
+    -
+      file: search
+      name: SearchController
+      path: /search
     ...
 CONTROLLERLIST
 
@@ -127,7 +138,9 @@ gulp = <<~GULP
                 gulp.dest(cssDest)
             ],
             function(err) {
-                console.log("--- err:", err);
+                if (err) {
+                    console.log("--- err:", err);
+                }
             }
         );
     }
@@ -160,10 +173,17 @@ ignore = <<~IGNORE
     # *.md
 IGNORE
 
-launch = <<~LAUNCH
-    #!/bin/bash
+illegalchars = <<~ILLEGALCHARS
+    ---
+    - "."
+    - "/"
+    ...
+ILLEGALCHARS
 
-    # Provide port number as argument.
+launch = <<~LAUNCH
+    \#!/bin/bash
+
+    \# Provide port number as argument.
     puma -b tcp://0.0.0.0:$1
 LAUNCH
 
@@ -204,11 +224,13 @@ files = {
     ".gitignore": ignore,
     "banlist.yml": banlist,
     "config.ru": config,
+    "contentlist.yml": contentlist,
     "controllerlist.yml": controllerlist,
     "customlist.yml": customlist,
     "Dockerfile": dockerfile,
     "Gemfile": gems,
     "gulpfile.js": gulp,
+    "illegalchars.yml": illegalchars,
     "launch.sh": launch,
     "package.json": package
 }
