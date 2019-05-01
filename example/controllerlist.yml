@@ -8,6 +8,10 @@
   name: ContentController
   path: /content
 -
+  file: search
+  name: SearchController
+  path: /search
+-
   file: test
   name: TestController
   path: /test
