@@ -12,7 +12,7 @@ $ gem install lei
 
 1. `cd path/to/project`
 2. `lei install`
-3. `./launch 4567`
+3. `./launch.sh 4567`
 
 ## Contributing
 
