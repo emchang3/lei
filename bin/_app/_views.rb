@@ -78,6 +78,38 @@ results = <<~RESULTS
                     == post
 RESULTS
 
+search = <<~SEARCH
+    doctype html
+    html[amp]
+        == slim :"global_partials/head",
+                locals: { title: title, style: style, url: url }
+        body
+            div#search
+                h1.content Search
+                form[action="/search/query" method="POST"]
+                    input[
+                        class="search-input"
+                        name="term"
+                        placeholder="Search term"
+                        type="text"
+                    ]
+                    input[
+                        class="search-input"
+                        name="when"
+                        type="date"
+                    ]
+                    select[name="specificity"]
+                        option[value="" selected=true] (All time)
+                        option[value="year"] Year
+                        option[value="month"] Month
+                        option[value="year"] Day
+                    input[
+                        class="search-input"
+                        name="submit"
+                        type="submit"
+                    ]
+SEARCH
+
 welcome = <<~WELCOME
     doctype html
     html[amp]
@@ -103,6 +135,7 @@ files = {
     "content.slim": content,
     "notfound.slim": notfound,
     "post.slim": post,
+    "search.slim": search,
     "search_results.slim": results,
     "welcome.slim": welcome
 }

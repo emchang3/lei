@@ -43,12 +43,45 @@ module ContentHelpers
         all - classified
     end
 
+    def self.get_content_dirs
+        YAML.load_file($contentDirs)
+    end
+
     def self.get_post(contentDir, title)
         content = self.get_content(contentDir)
 
         post = "#{contentDir}/#{title}.md"
 
         content.include?(post) ? [ post ] : []
+    end
+
+    def self.get_searchdest(params)
+        parts = {}
+
+        term = params["term"]
+
+        parts["term"] = self.sanitize_term(term) if !term.nil? && term != ""
+
+        whenp = params["when"]
+        specificity = params["specificity"]
+
+        if !whenp.nil? && whenp != "" && !specificity.nil? && specificity != ""
+            begin
+                whenRange = Date.parse(whenp)
+                year = "year=#{whenRange.strftime("%Y")}"
+                month = "month=#{whenRange.strftime("%m")}"
+                day = "day=#{whenRange.strftime("%d")}"
+
+                parts["year"] = year if specificity.match?(/^(year|month|day)$/)
+                parts["month"] = month if specificity.match?(/^(month|day)$/)
+                parts["day"] = day if specificity == "day"
+            rescue => exception
+                # TODO: Implement exception handling.
+                # This block just serves to swallow the exception.
+            end
+        end
+
+        return self.mp_eu("search/results", parts, {})
     end
 
     <<~load_css
@@ -61,6 +94,7 @@ module ContentHelpers
         `cat #{$style_root}/#{filename}.css`
     end
 
+    # Merge Params, Encode URL.
     def self.mp_eu(path, params, replacement)
         newParams = {}
         params.each { |k, v| newParams[k] = v }
@@ -121,6 +155,15 @@ module ContentHelpers
             content = `cat #{filename}`
             CARPET.render(content)
         end
+    end
+
+    def self.sanitize_term(path)
+        bannedChars = YAML.load_file($bannedChars)
+
+        processed = path
+        bannedChars.each { |char| processed = path.gsub(char, "") }
+
+        return processed
     end
 
     def self.time_sort(content)

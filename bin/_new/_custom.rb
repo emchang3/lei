@@ -10,6 +10,7 @@ def add_new(name)
     capitalizedName = name.capitalize
 
     cwd = Dir.pwd
+
     custom = YAML.load_file("#{cwd}/customlist.yml")
     custom.select! { |c| c["file"] != downcasedName }
 
@@ -19,6 +20,15 @@ def add_new(name)
         "title" => capitalizedName,
         "content" => [ "#{downcasedName}.md" ]
     }
+
+    custom.sort! { |a, b| a["name"] <=> b["name"] }
+
+    content = YAML.load_file("#{cwd}/contentlist.yml")
+    content.select! { |c| c != downcasedName }
+
+    content << downcasedName
+
+    content.sort!
 
     customView = <<~VIEW
         doctype html
@@ -63,6 +73,7 @@ def add_new(name)
     initialContent = "# #{capitalizedName}\n\nYour content goes here."
 
     `echo '#{custom.to_yaml}' > #{cwd}/customlist.yml`
+    `echo '#{content.to_yaml}' > #{cwd}/contentlist.yml`
     `mkdir #{cwd}/#{downcasedName}`
     `echo '#{initialContent}' > #{cwd}/#{downcasedName}/#{downcasedName}.md`
     `echo '#{customView}' > #{cwd}/views/#{downcasedName}.slim`

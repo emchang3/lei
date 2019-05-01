@@ -3,9 +3,10 @@ html[amp]
     == slim :"global_partials/head",
             locals: { title: title, style: style, url: url }
     body
-        h1.content Search Results
-        == slim :"content_partials/pagination",
-            locals: { page: page, pages: pages, pageUrls: pageUrls }
-        - for post in content
-            section.content
-                == post
+        div#results
+            h1 Search Results
+            == slim :"content_partials/pagination",
+                locals: { page: page, pages: pages, pageUrls: pageUrls }
+            - for post in content
+                section.content
+                    == post
