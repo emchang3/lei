@@ -9,7 +9,7 @@ GEM
     rack-protection (2.0.4)
       rack
     rake (12.3.3)
-    redcarpet (3.4.0)
+    redcarpet (3.5.1)
     rspec (3.8.0)
       rspec-core (~> 3.8.0)
       rspec-expectations (~> 3.8.0)
@@ -42,7 +42,7 @@ DEPENDENCIES
   puma (~> 3.12.6)
   rack (~> 2.1.4)
   rake (~> 12.3.3)
-  redcarpet (~> 3.4.0)
+  redcarpet (~> 3.5.1)
   rspec (~> 3.8.0)
   sinatra (~> 2.0.3)
   slim (~> 3.0.9)
