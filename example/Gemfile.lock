@@ -5,7 +5,7 @@ GEM
     dotenv (2.2.2)
     mustermann (1.0.3)
     nio4r (2.5.8)
-    puma (4.3.11)
+    puma (4.3.12)
       nio4r (~> 2.0)
     rack (2.1.4)
     rack-protection (2.0.4)
@@ -41,7 +41,7 @@ PLATFORMS
 
 DEPENDENCIES
   dotenv (~> 2.2.2)
-  puma (~> 4.3.11)
+  puma (~> 4.3.12)
   rack (~> 2.1.4)
   rake (~> 12.3.3)
   redcarpet (~> 3.5.1)
